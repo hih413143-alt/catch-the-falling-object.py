@@ -1,0 +1,77 @@
+import pygame
+import sys
+import time
+import random
+
+# --- Settings ---
+WIDTH, HEIGHT = 800, 600
+FPS = 60
+BG_COLOR = (30, 30, 30)  # dark gray background
+i=10
+#speed=0.0001
+###--Initialize Pygame and variables--###
+pygame.init()
+player1 = pygame.Rect(300, 550, 100,25)
+ran=random.randint(1,WIDTH)
+obje = pygame.Rect(random.randint(1,WIDTH),50,50,50)
+is_running1= True
+
+# --- Setup ---
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Pygame Base Template")
+clock = pygame.time.Clock()
+
+# --- Game Loop ---
+running = True
+while running:
+    # Handle events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+         
+        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP :
+            ##-keys for player 1-##
+            if event.key == pygame.K_d:
+                player1.x +=20
+            if event.key == pygame.K_a:
+                player1.x -=20
+            ##-keys for player 2-#    
+            #-------IMPORTANT------#    
+                # Moving ball
+                ####Ignore this code
+        #while not player1.colliderect(obje):
+            #obje.y += speed
+        ##Up to hear unless you are modeer thane you can use this##
+    if is_running1:
+        obje.y+=5
+    if obje.y >= HEIGHT or obje.colliderect(player1):
+        obje= pygame.Rect(random.randint(1,WIDTH),50,50,50)
+
+            
+            
+
+
+            
+    # Handle input (example: quit with ESC)
+    
+
+    #--PLAYER 1 SCORE AND SPAWNING THE BALL--#
+
+    
+
+
+    # Draw everything
+    screen.fill(BG_COLOR)
+
+    # Example: draw a rectangle
+    pygame.draw.rect(screen,(255,255,0),player1)
+    pygame.draw.rect(screen,(255,255,0),obje)
+    # Flip display
+    pygame.display.flip()
+
+    # Cap the frame rate
+    clock.tick(FPS)
+
+# Quit Pygame
+pygame.quit()
+sys.exit()
